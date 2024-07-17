@@ -21,11 +21,21 @@ function App() {
   //   setAuth(true);
   // }, 3000);
 
+  const initialCart = () => {
+    const localStorageCart = localStorage.getItem("cart");
+    return localStorageCart ? JSON.parse(localStorageCart) : [];
+  };
+
   const [data, setData] = useState(db);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(initialCart);
 
   const MAX_ITEMS = 5;
   const MIN_ITEMS = 1;
+
+  // Almacena el carrito en el localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   // Función para agregar elementos al carrito
   function addToCart(item) {
