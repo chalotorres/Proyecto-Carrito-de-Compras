@@ -22,8 +22,22 @@ function App() {
   // }, 3000);
 
   const [data, setData] = useState(db);
-
   const [cart, setCart] = useState([]);
+
+  function addToCart(item) {
+    // Comprueba si el elemento ya existe en el carrito
+    const itemExist = cart.findIndex((guitar) => guitar.id === item.id);
+    if (itemExist >= 0) {
+      // Si existe en el carrito
+      const updatedCart = [...cart];
+      updatedCart[itemExist].quantity++;
+      setCart(updatedCart);
+    } else {
+      // No existe en el carrito
+      item.quantity = 1;
+      setCart([...cart, item]);
+    }
+  }
 
   return (
     <>
@@ -33,7 +47,12 @@ function App() {
 
         <div className="row mt-5">
           {data.map((guitar) => (
-            <Guitar key={guitar.id} guitar={guitar} setCart={setCart} />
+            <Guitar
+              key={guitar.id}
+              guitar={guitar}
+              setCart={setCart}
+              addToCart={addToCart}
+            />
           ))}
         </div>
       </main>
