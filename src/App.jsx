@@ -63,7 +63,7 @@ function App() {
     setCart(updatedCart);
   }
 
-  // Función para incrementar elementos de un producto en el carrito
+  // Función para decrementar elementos de un producto en el carrito
   function decreaseQuantity(id) {
     const updatedCart = cart.map((item) => {
       if (item.id === id && item.quantity !== MIN_ITEMS) {
@@ -77,6 +77,11 @@ function App() {
     setCart(updatedCart);
   }
 
+  // Función para limpiar carrito
+  function clearCart() {
+    setCart([]);
+  }
+
   return (
     <>
       <Header
@@ -84,6 +89,7 @@ function App() {
         removeFromCart={removeFromCart}
         increaseQuantity={increaseQuantity}
         decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
       />
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
